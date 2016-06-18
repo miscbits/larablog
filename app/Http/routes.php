@@ -19,4 +19,7 @@ Route::group(['prefix'=>'api'], function()
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::get('user', 'UserController@show');
+    Route::get('register', 'UserController@create');
 });
+
+Route::get('register/verify/{confirmationCode}', 'UserController@confirm');

@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'admin@larablog.com', 'name' => 'Larablog Web Master'],
 
     /*
     |--------------------------------------------------------------------------
