@@ -23,4 +23,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isAnAdmin() {
+        return $this->admin == 1;
+    }
+
+    public function canEdit($userID) {
+        $user = User::find($userID);
+        $thisIsTheSameUser = $user->id == $this->id;
+        $thisUserIsAnAdminAndTheOtherUserIsNot = (!($user->isAnAdmin()) && $this->isAnAdmin());
+        return ($thisIsTheSameUser 
+            || $thisUserIsAnAdminAndTheOtherUserIsNot);
+    }
+
+    public function articles() {
+        return $this->hasMany('App\Article');
+    }
+    
 }

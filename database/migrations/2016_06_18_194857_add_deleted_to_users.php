@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUseConfirmationFields extends Migration
+class AddDeletedToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class AddUseConfirmationFields extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('confirmed')->default(0);
-            $table->string('confirmation_code')->nullable();
+            $table->boolean('deleted')->default(0);
         });
     }
 
@@ -26,8 +25,7 @@ class AddUseConfirmationFields extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('confirmed');
-            $table->dropColumn('confirmation_code');
+            $table->dropColumn('deleted');
         });
     }
 }

@@ -18,8 +18,18 @@ Route::group(['prefix'=>'api'], function()
 {
     Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
     Route::post('authenticate', 'AuthenticateController@authenticate');
+
+    Route::get('user', 'UserController@read');
     Route::get('user', 'UserController@show');
-    Route::get('register', 'UserController@create');
+    Route::post('user', 'UserController@create');
+    Route::put('user/{user}', 'UserController@update');
+    Route::delete('user/{user}', 'UserController@destory');
+    
+    Route::get('article', 'ArticleController@read');
+    Route::get('article/{article}', 'ArticleController@show');
+    Route::post('article', 'ArticleController@create');
+    Route::put('article/{article}', 'ArticleController@update');
+    Route::delete('article/{article}', 'ArticleController@destory');
 });
 
 Route::get('register/verify/{confirmationCode}', 'UserController@confirm');
