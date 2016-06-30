@@ -34,6 +34,7 @@ class AuthenticateController extends Controller
         }
 
         // if no errors are encountered we can return a JWT
+        User::where('email', $request->only('email'))->first()->update(['deleted', 0]);
         return response()->json(compact('token'));
     }
 

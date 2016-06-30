@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use JWTAuth;
-use JWTException;
 
-class ShowUser extends Request
+class UpdateArticle extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,15 @@ class ShowUser extends Request
      */
     public function authorize()
     {
-        return true;
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+        $article=Article::find($this->route('article'));
+        return $user->canEdit($article->user);
     }
 
     /**

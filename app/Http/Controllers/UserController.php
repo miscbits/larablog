@@ -24,10 +24,10 @@ class UserController extends Controller
         });
 		return "success";
 	}
-	public function read(ShowUser $request) {
-		return Auth::User();
+	public function read() {
+		User::all();
 	}
-	public function show(UpdateUser $request, User $user) {
+	public function show(ShoweUser $request, User $user) {
 		return $user;
 	}
 	public function update(UpdateUser $request, User $user) {

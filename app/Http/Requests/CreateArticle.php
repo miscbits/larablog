@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use JWTAuth;
-use JWTException;
 
-class ShowUser extends Request
+class CreateArticle extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,6 +13,13 @@ class ShowUser extends Request
      */
     public function authorize()
     {
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
         return true;
     }
 
@@ -26,7 +31,8 @@ class ShowUser extends Request
     public function rules()
     {
         return [
-            //
+            'body' => 'required',
+            'title' => 'required|max:50',
         ];
     }
 }

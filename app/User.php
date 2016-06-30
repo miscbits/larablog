@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     public function canEdit($userID) {
         $user = User::find($userID);
-        $thisIsTheSameUser = $user->id == $this->id;
+        $thisIsTheSameUser = ($userID == $this->id);
         $thisUserIsAnAdminAndTheOtherUserIsNot = (!($user->isAnAdmin()) && $this->isAnAdmin());
         return ($thisIsTheSameUser 
             || $thisUserIsAnAdminAndTheOtherUserIsNot);

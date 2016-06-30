@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    	User::truncate();
+
         $users = array(
                 ['name' => 'Ryan Chenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret'), 'username' => 'RyanChenkie', 'confirmed' => 1, 'confirmation_code' => null, 'admin' => 1, 'deleted' => 0],
                 ['name' => 'Chris Sevilleja', 'email' => 'chris@scotch.io', 'password' => Hash::make('secret'), 'username' => 'ChrisSevilleja', 'confirmed' => 1, 'confirmation_code' => null, 'admin' => 0, 'deleted' => 0],
