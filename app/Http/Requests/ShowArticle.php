@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\User, App\Article, Carbon\Carbon;
+use App\User, App\Article, Carbon\Carbon, JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class ShowArticle extends Request
 {
@@ -14,18 +15,19 @@ class ShowArticle extends Request
      */
     public function authorize()
     {
-        $article = Article::find($this->route('article'));
+        $article = $this->route('article');
 
-        if ($this->viewable)
+        if ($article->viewable())
             return true;
         try {
             if (! $user = JWTAuth::parseToken()->authenticate()) {
-                $user = new User;
+                return false;
             }
-        } catch (Exception $e) {
-            $user = new User;
         }
-        return $article->user->is($user) || $user->isAnAdmin();
+        catch (\Exception $e) {
+            return false;
+        }
+        return $article->user->id == $user->id || $user->isAnAdmin();
    
     }
 

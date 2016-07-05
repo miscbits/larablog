@@ -161,6 +161,7 @@ return [
          * JWT Authentication
          */
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        'Barryvdh\Cors\ServiceProvider',
 
 
     ],

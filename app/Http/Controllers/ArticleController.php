@@ -8,15 +8,18 @@ use App\Http\Requests;
 use App\Article;
 use App\User;
 use Auth;
+use App\Http\Requests\ShowArticle;
 
-class ArticlesController extends Controller
+class ArticleController extends Controller
 {
 
     public function create(CreateArticle $request){
-    	Auth::user()->articles()->associate(Article::create($request->all()));
+        $article = new Article($request->all());
+    	Auth::user()->articles()->save($article);
+        $article->update();
     }
     public function read(){
-    	return App\Article::active()->get();
+    	return Article::active()->get();
     }
     public function userArticles(ShowUser $request, User $user) {
     	$user->articles->active()->get();
@@ -25,13 +28,16 @@ class ArticlesController extends Controller
     	$article->update($request->all());
     }
     public function destroy(UpdateArticle $request, Article $article){
-    	if($article->deleted)
-    		$article->destroy;
-    	else
+    	if($article->deleted) {
+            $article->destroy();
+        }   
+        else {
     		$article->update('deleted', 1);
+        }
     }
     public function show(ShowArticle $request, Article $article){
-    	return $article;
+    	$article->user;
+        return $article;
     }
     public function restore(UpdateArticle $request, Article $article) {
     	if ($article->deleted) {

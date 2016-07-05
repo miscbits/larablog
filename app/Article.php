@@ -11,7 +11,7 @@ class Article extends Model
     protected $dates = ['created_at', 'updated_at', 'published_at'];
 
     public function scopeActive($query) {
-    	return $query->where('publish', 1)->where('published_at', '<', Carbon\Carbon::now())->where('deleted', '!=', 1)
+    	return $query->where('publish', 1)->where('published_at', '<=', Carbon::now())->where('deleted', '!=', 1);
     }
 
 	protected $fillable = [
@@ -26,7 +26,7 @@ class Article extends Model
 	}
 
 	public function viewable() {
-		return !($this->deleted) && $this->published_at <= Carbon::now();
+		return !($this->deleted) && $this->published_at <= Carbon::now() && $this->publish;
 	}
 
 }

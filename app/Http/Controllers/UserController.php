@@ -25,9 +25,9 @@ class UserController extends Controller
 		return "success";
 	}
 	public function read() {
-		User::all();
+		return User::all();
 	}
-	public function show(ShoweUser $request, User $user) {
+	public function show(ShowUser $request, User $user) {
 		return $user;
 	}
 	public function update(UpdateUser $request, User $user) {

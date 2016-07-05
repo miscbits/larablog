@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
+use JWTAuth;
 class UpdateUser extends Request
 {
     /**
