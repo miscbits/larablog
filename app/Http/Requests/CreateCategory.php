@@ -13,11 +13,7 @@ class CreateCategory extends Request
      */
     public function authorize()
     {
-        try {
-            return (JWTAuth::parseToken()->authenticate()->isAnAdmin());
-        } catch (Exception $e) {
-            return false;
-        }
+        return true;
     }
 
     /**

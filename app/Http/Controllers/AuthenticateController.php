@@ -10,17 +10,6 @@ use App\User;
 
 class AuthenticateController extends Controller
 {
-	public function __construct() {
-		$this->middleware('jwt.auth', ['except' => ['authenticate']]);
-	}
-
-	public function index()
-	{
-	    // Retrieve all the users in the database and return them
-	    $users = User::all();
-	    return $users;
-	}
-
 	public function authenticate(Request $request) {
 		$credentials = $request->only('email', 'password');
         try {

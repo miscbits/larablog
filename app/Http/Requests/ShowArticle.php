@@ -17,8 +17,10 @@ class ShowArticle extends Request
     {
         $article = $this->route('article');
 
-        if ($article->viewable())
+        if ($article->viewable){
             return true;
+        }
+        
         try {
             if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return false;

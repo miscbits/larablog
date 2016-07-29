@@ -13,15 +13,8 @@ class UpdateArticle extends Request
      */
     public function authorize()
     {
-        try {
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return false;
-            }
-        } catch (Exception $e) {
-            return false;
-        }
         $article=Article::find($this->route('article'));
-        return $user->canEdit($article->user);
+        return \Auth::user()->canEdit($article->user);
     }
 
     /**

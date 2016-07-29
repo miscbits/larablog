@@ -13,13 +13,6 @@ class CreateArticle extends Request
      */
     public function authorize()
     {
-        try {
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return false;
-            }
-        } catch (Exception $e) {
-            return false;
-        }
         return true;
     }
 
