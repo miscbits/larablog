@@ -163,7 +163,6 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         'Barryvdh\Cors\ServiceProvider',
         Zizaco\Entrust\EntrustServiceProvider::class,
-        Yab\Laracogs\LaracogsProvider::class,
         
     ],
 
